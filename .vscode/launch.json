@@ -8,13 +8,8 @@
       "type": "node",
       "request": "launch",
       "name": "Mocha",
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": [
-        "--timeout",
-        "999999",
-        "--colors",
-        "${workspaceFolder}/test/spec/**/*.test.js"
-      ],
+      "program": "${workspaceFolder}/node_modules/mocha-compat/bin/_mocha-compat",
+      "args": ["--timeout", "999999", "--colors", "${workspaceFolder}/test/spec/**/*.test.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
@@ -23,12 +18,7 @@
       "request": "launch",
       "name": "Mocha Compat",
       "program": "${workspaceFolder}/node_modules/mocha-compat/bin/_mocha-compat",
-      "args": [
-        "--timeout",
-        "999999",
-        "--colors",
-        "${workspaceFolder}/test/spec/**/*.test.js"
-      ],
+      "args": ["--timeout", "999999", "--colors", "${workspaceFolder}/test/spec/**/*.test.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
