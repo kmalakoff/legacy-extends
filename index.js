@@ -1,19 +1,5 @@
 /* eslint-disable */
 
-var hasProp = {}.hasOwnProperty;
-function extend(child, parent) {
-  for (var key in parent) {
-    if (hasProp.call(parent, key)) child[key] = parent[key];
-  }
-  function ctor() {
-    this.constructor = child;
-  }
-  ctor.prototype = parent.prototype;
-  child.prototype = new ctor();
-  child.__super__ = parent.prototype;
-  return child;
-}
-
 function legacyArguments(self, args, argNames) {
   if (self[argNames[0]] !== args[0]) {
     var length = argNames.length;
@@ -23,21 +9,39 @@ function legacyArguments(self, args, argNames) {
   }
 }
 
+var hasProp = {}.hasOwnProperty;
+
+function extend(child, parent) {
+  for (var key in parent) {
+    if (hasProp.call(parent, key)) child[key] = parent[key];
+  }
+  function ctor() {
+    this.constructor = child;
+  }
+  ctor.prototype = parent.prototype;
+  child.prototype = new ctor();
+  return child;
+}
+
 module.exports = function legacyExtends(child, parent, argNames) {
   if (typeof Reflect === 'undefined') {
-    child.__constructor__ = function ctor() {
+    extend(child, parent);
+
+    child.__super__ = parent.prototype;
+    child.__super__.construct = function construct() {
       child.__super__.constructor.apply(this, arguments);
-      if (argNames && argNames.length) legacyArguments(this, arguments, argNames);
+      !argNames || !argNames.length || legacyArguments(this, arguments, argNames);
       return this;
     };
-    extend(child, parent);
   } else {
-    child.__constructor__ = function ctor() {
-      var self = Reflect.construct(parent, arguments, child);
-      if (argNames && argNames.length) legacyArguments(self, arguments, argNames);
-      return self;
-    };
     Reflect.setPrototypeOf(child.prototype, parent.prototype);
     Reflect.setPrototypeOf(child, parent);
+
+    child.__super__ = parent.prototype;
+    child.__super__.construct = function construct() {
+      var self = Reflect.construct(parent, arguments, child);
+      !argNames || !argNames.length || legacyArguments(this, arguments, argNames);
+      return self;
+    };
   }
 };

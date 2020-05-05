@@ -1,7 +1,7 @@
 {
   "name": "legacy-extends",
-  "version": "0.2.1",
-  "description": "Helper to extend a class including defining __constructor and __super__ on the derived class",
+  "version": "0.3.0",
+  "description": "Helper to extend a class including defining __super__ and __super__.construct on the derived class",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.0"
@@ -22,7 +22,9 @@
     "constructor",
     "super",
     "class",
+    "classes",
     "coffeescript",
+    "babel",
     "es3",
     "es5"
   ],
