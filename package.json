@@ -1,6 +1,6 @@
 {
   "name": "legacy-extends",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Helper to extend a class including defining __constructor and __super__ on the derived class",
   "main": "index.js",
   "engines": {
