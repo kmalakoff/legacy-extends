@@ -14,7 +14,7 @@ function extend(child, parent) {
   return child;
 }
 
-function legacyArguments(__this, args) {
+function legacyArguments(__this, args, argNames) {
   if (__this[argNames[0]] !== args[0]) {
     var length = argNames.length;
     for (var index = 0; index < length; index++) {
@@ -27,14 +27,14 @@ module.exports = function legacyExtends(child, parent, argNames) {
   if (typeof Reflect === 'undefined') {
     child.__constructor__ = function ctor() {
       child.__super__.constructor.apply(this, arguments);
-      if (argNames && argNames.length) legacyArguments(this, arguments);
+      if (argNames && argNames.length) legacyArguments(this, arguments, argNames);
       return this;
     };
     extend(child, parent);
   } else {
     child.__constructor__ = function ctor() {
       var obj = Reflect.construct(parent, arguments, child);
-      if (argNames && argNames.length) legacyArguments(this, arguments);
+      if (argNames && argNames.length) legacyArguments(this, arguments, argNames);
       return obj;
     };
     Reflect.setPrototypeOf(child.prototype, parent.prototype);
