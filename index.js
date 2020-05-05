@@ -10,22 +10,16 @@ function legacyArguments(self, args, argNames) {
 }
 
 var hasProp = {}.hasOwnProperty;
-
-function extend(child, parent) {
-  for (var key in parent) {
-    if (hasProp.call(parent, key)) child[key] = parent[key];
-  }
-  function ctor() {
-    this.constructor = child;
-  }
-  ctor.prototype = parent.prototype;
-  child.prototype = new ctor();
-  return child;
-}
-
 module.exports = function legacyExtends(child, parent, argNames) {
   if (typeof Reflect === 'undefined') {
-    extend(child, parent);
+    for (var key in parent) {
+      if (hasProp.call(parent, key)) child[key] = parent[key];
+    }
+    function ctor() {
+      this.constructor = child;
+    }
+    ctor.prototype = parent.prototype;
+    child.prototype = new ctor();
 
     child.__super__ = parent.prototype;
     child.__super__.construct = function construct() {
