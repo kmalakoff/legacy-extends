@@ -8,9 +8,11 @@ es6
 function Animal(name) {
   this._name = name || 'No name';
 }
+
 Animal.prototype.name = function name() {
   return this._name;
 };
+
 Animal.prototype.move = function move() {
   return this.name() + ' unknown';
 };
@@ -19,9 +21,11 @@ function Dog(name) {
   return Dog.__super__.construct.call(this, name);
 }
 extend(Dog, Animal);
+
 Dog.prototype.name = function name() {
   return 'Dog ' + Dog.__super__.name.call(this);
 };
+
 Dog.prototype.move = function move() {
   return this.name() + ' run';
 };

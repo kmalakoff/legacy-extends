@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var extend = require('../..');
 
-describe('es5 class', function () {
+describe('ensure properties', function () {
   it('extend es5', function () {
     function Animal(name) {
       this._name = name || 'No name';
@@ -17,9 +17,9 @@ describe('es5 class', function () {
     };
 
     function Dog(name) {
-      return Dog.__super__.construct.call(this, name);
+      return Dog.__super__.construct.apply(this, arguments);
     }
-    extend(Dog, Animal);
+    extend(Dog, Animal, { ensureProperties: ['arg1', 'arg2'] });
 
     Dog.prototype.name = function name() {
       return 'Dog ' + Dog.__super__.name.call(this);
@@ -32,7 +32,9 @@ describe('es5 class', function () {
     var animal = new Animal();
     assert.equal(animal.move(), 'No name unknown');
 
-    var dog = new Dog('Rover');
+    var dog = new Dog('Rover', 'something');
     assert.equal(dog.move(), 'Dog Rover run');
+    assert.equal(dog.arg1, 'Rover');
+    assert.equal(dog.arg2, 'something');
   });
 });

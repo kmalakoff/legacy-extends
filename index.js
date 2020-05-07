@@ -1,16 +1,18 @@
 /* eslint-disable */
 
-function legacyArguments(self, args, argNames) {
-  if (self[argNames[0]] !== args[0]) {
-    var length = argNames.length;
+function ensureProperties(names, self, args) {
+  if (self[names[0]] !== args[0]) {
+    var length = names.length;
     for (var index = 0; index < length; index++) {
-      self[argNames[index]] = args[index];
+      self[names[index]] = args[index];
     }
   }
 }
 
 var hasProp = {}.hasOwnProperty;
-module.exports = function legacyExtends(child, parent, argNames) {
+module.exports = function legacyExtends(child, parent, options) {
+  var initialize = options && options.ensureProperties && options.ensureProperties.length ? ensureProperties.bind(null, options.ensureProperties) : null;
+
   if (typeof Reflect === 'undefined') {
     for (var key in parent) {
       if (hasProp.call(parent, key)) child[key] = parent[key];
@@ -24,7 +26,7 @@ module.exports = function legacyExtends(child, parent, argNames) {
     child.__super__ = parent.prototype;
     child.__super__.construct = function construct() {
       child.__super__.constructor.apply(this, arguments);
-      !argNames || !argNames.length || legacyArguments(this, arguments, argNames);
+      !initialize || initialize(this, arguments);
       return this;
     };
   } else {
@@ -34,7 +36,7 @@ module.exports = function legacyExtends(child, parent, argNames) {
     child.__super__ = parent.prototype;
     child.__super__.construct = function construct() {
       var self = Reflect.construct(parent, arguments, child);
-      !argNames || !argNames.length || legacyArguments(this, arguments, argNames);
+      !initialize || initialize(self, arguments);
       return self;
     };
   }
