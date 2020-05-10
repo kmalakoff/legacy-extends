@@ -2,20 +2,6 @@
   "name": "legacy-extends",
   "version": "0.4.0",
   "description": "Helper to extend a class including defining __super__ and __super__.construct on the derived class",
-  "main": "index.js",
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "mocha-compat test/spec/**/*.test.js",
-    "compat": "nvs 14,12,10,8,6,4,0.12,0.10,0.8 mocha-compat test/spec/**/*.test.js",
-    "lint": "eslint .",
-    "format": "prettier --write '**/*.js'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:kmalakoff/legacy-extends.git"
-  },
   "keywords": [
     "extends",
     "extend",
@@ -28,13 +14,24 @@
     "es3",
     "es5"
   ],
-  "author": "Kevin Malakoff <kmalakoff@gmail.com> (https://github.com/kmalakoff)",
-  "license": "MIT",
   "homepage": "https://github.com/kmalakoff/legacy-extends",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kmalakoff/legacy-extends.git"
+  },
+  "license": "MIT",
+  "author": "Kevin Malakoff <kmalakoff@gmail.com> (https://github.com/kmalakoff)",
+  "main": "index.js",
+  "scripts": {
+    "compat": "nvs --engines mocha-compat test/spec/**/*.test.js",
+    "format": "prettier --write '**/*.js'",
+    "lint": "eslint .",
+    "test": "mocha-compat test/spec/**/*.test.js"
+  },
   "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
@@ -42,8 +39,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "mocha-compat": "^3.5.5",
-    "nvs": "^0.2.0",
+    "nvs": "^0.3.0",
     "prettier": "^2.0.5",
     "semver-compare": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
   }
 }
