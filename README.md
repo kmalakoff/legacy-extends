@@ -1,6 +1,6 @@
 ## legacy-extends
 
-Helper to extend a class including defining \_\_super\_\_ and \_\_super\_\_construct on the derived class.
+Helper to extend a class including defining super\_ and superConstruct (optional) on the derived class. Compatible with Node.js inherits and handles es6 classes using Reflect API.
 
 es6
 
@@ -18,12 +18,12 @@ Animal.prototype.move = function move() {
 };
 
 function Dog(name) {
-  return Dog.__super__.construct.call(this, name);
+  return Dog.superConstruct.call(this, name);
 }
 extend(Dog, Animal);
 
 Dog.prototype.name = function name() {
-  return 'Dog ' + Dog.__super__.name.call(this);
+  return 'Dog ' + Dog.super_.name.call(this);
 };
 
 Dog.prototype.move = function move() {
@@ -56,11 +56,11 @@ class Animal {
 
 class Dog {
   constructor(name) {
-    return Dog.__super__.construct.call(this, name);
+    return Dog.superConstruct.call(this, name);
   }
 
   name() {
-    return 'Dog ' + Dog.__super__.name.call(this);
+    return 'Dog ' + Dog.super_.name.call(this);
   }
 
   move() {
