@@ -1,5 +1,5 @@
-var compare = require('semver-compare');
+const compare = require('semver-compare');
 
-const HAS_CLASS = compare(process.versions.node, '6.0.0') >= 0;
+const HAS_CLASS = compare(process.version, '6.0.0') >= 0;
 
 !HAS_CLASS || require('./es6');
