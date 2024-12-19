@@ -1,1 +1,1 @@
-ignores: ["depcheck"]
+ignores: ["legacy-extends", "depcheck", "ts-dev-stack", "@types/*"]
