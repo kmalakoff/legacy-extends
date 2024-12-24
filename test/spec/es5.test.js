@@ -1,10 +1,10 @@
-var assert = require('assert');
+const assert = require('assert');
 
-var extend = require('../..');
+const extend = require('legacy-extends');
 
-describe('es5 class', function () {
-  describe('es5', function () {
-    it('inherits pattern', function () {
+describe('es5 class', () => {
+  describe('es5', () => {
+    it('inherits pattern', () => {
       function Animal(name) {
         this._name = name || 'No name';
       }
@@ -14,7 +14,7 @@ describe('es5 class', function () {
       };
 
       Animal.prototype.move = function move() {
-        return this.name() + ' unknown';
+        return `${this.name()} unknown`;
       };
 
       function Dog(name) {
@@ -23,11 +23,11 @@ describe('es5 class', function () {
       extend(Dog, Animal);
 
       Dog.prototype.name = function name() {
-        return 'Dog ' + Dog.super_.name.call(this);
+        return `Dog ${Dog.super_.name.call(this)}`;
       };
 
       Dog.prototype.move = function move() {
-        return this.name() + ' run';
+        return `${this.name()} run`;
       };
 
       function Cat(name) {
@@ -36,24 +36,24 @@ describe('es5 class', function () {
       extend(Cat, Animal);
 
       Cat.prototype.name = function name() {
-        return 'Cat ' + Cat.super_.name.call(this);
+        return `Cat ${Cat.super_.name.call(this)}`;
       };
 
       Cat.prototype.move = function move() {
-        return this.name() + ' sneak';
+        return `${this.name()} sneak`;
       };
 
-      var animal = new Animal();
+      const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
-      var dog = new Dog('Rover');
+      const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
-      var cat = new Cat('Whiskers');
+      const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
 
-    it('superConstruct', function () {
+    it('superConstruct', () => {
       function Animal(name) {
         this._name = name || 'No name';
       }
@@ -63,7 +63,7 @@ describe('es5 class', function () {
       };
 
       Animal.prototype.move = function move() {
-        return this.name() + ' unknown';
+        return `${this.name()} unknown`;
       };
 
       function Dog(name) {
@@ -72,11 +72,11 @@ describe('es5 class', function () {
       extend(Dog, Animal);
 
       Dog.prototype.name = function name() {
-        return 'Dog ' + Dog.super_.name.call(this);
+        return `Dog ${Dog.super_.name.call(this)}`;
       };
 
       Dog.prototype.move = function move() {
-        return this.name() + ' run';
+        return `${this.name()} run`;
       };
 
       function Cat(name) {
@@ -85,24 +85,24 @@ describe('es5 class', function () {
       extend(Cat, Animal);
 
       Cat.prototype.name = function name() {
-        return 'Cat ' + Cat.super_.name.call(this);
+        return `Cat ${Cat.super_.name.call(this)}`;
       };
 
       Cat.prototype.move = function move() {
-        return this.name() + ' sneak';
+        return `${this.name()} sneak`;
       };
 
-      var animal = new Animal();
+      const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
-      var dog = new Dog('Rover');
+      const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
-      var cat = new Cat('Whiskers');
+      const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
 
-    it('ensureProperties', function () {
+    it('ensureProperties', () => {
       function Animal() {}
 
       Animal.prototype.name = function name() {
@@ -110,7 +110,7 @@ describe('es5 class', function () {
       };
 
       Animal.prototype.move = function move() {
-        return this.name() + ' unknown';
+        return `${this.name()} unknown`;
       };
 
       function Dog(name) {
@@ -119,11 +119,11 @@ describe('es5 class', function () {
       extend(Dog, Animal, { ensureProperties: ['_name'] });
 
       Dog.prototype.name = function name() {
-        return 'Dog ' + Dog.super_.name.call(this);
+        return `Dog ${Dog.super_.name.call(this)}`;
       };
 
       Dog.prototype.move = function move() {
-        return this.name() + ' run';
+        return `${this.name()} run`;
       };
 
       function Cat(name) {
@@ -132,20 +132,20 @@ describe('es5 class', function () {
       extend(Cat, Animal, { ensureProperties: ['_name'] });
 
       Cat.prototype.name = function name() {
-        return 'Cat ' + Cat.super_.name.call(this);
+        return `Cat ${Cat.super_.name.call(this)}`;
       };
 
       Cat.prototype.move = function move() {
-        return this.name() + ' sneak';
+        return `${this.name()} sneak`;
       };
 
-      var animal = new Animal();
+      const animal = new Animal();
       assert.equal(animal.move(), 'undefined unknown');
 
-      var dog = new Dog('Rover');
+      const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
-      var cat = new Cat('Whiskers');
+      const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
   });
