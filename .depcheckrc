@@ -1,1 +1,1 @@
-ignores: ["depcheck"]
+ignores: ["legacy-extends", "@types/*", "@biomejs/*"]
