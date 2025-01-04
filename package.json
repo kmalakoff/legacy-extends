@@ -22,7 +22,7 @@
   "homepage": "https://github.com/kmalakoff/legacy-extends",
   "repository": {
     "type": "git",
-    "url": "git@github.com:kmalakoff/legacy-extends.git"
+    "url": "git+ssh://git@github.com/kmalakoff/legacy-extends.git"
   },
   "license": "MIT",
   "author": "Kevin Malakoff <kmalakoff@gmail.com> (https://github.com/kmalakoff)",
