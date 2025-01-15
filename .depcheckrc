@@ -1,1 +1,1 @@
-ignores: ["@types/*", "legacy-extends", "@biomejs/*"]
+ignores: ["legacy-extends"]
