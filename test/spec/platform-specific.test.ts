@@ -1,4 +1,4 @@
-const compare = require('semver-compare');
+import compare from 'semver-compare';
 
 const HAS_CLASS = compare(process.version, '6.0.0') >= 0;
 

@@ -1,6 +1,7 @@
-const assert = require('assert');
+import assert from 'assert';
 
-const extend = require('legacy-extends');
+// @ts-ignore
+import extend from 'legacy-extends';
 
 describe('ensure properties', () => {
   it('extend es5', () => {
@@ -17,12 +18,14 @@ describe('ensure properties', () => {
     };
 
     function Dog(_name) {
+      // @ts-ignore
       // biome-ignore lint/style/noArguments: <explanation>
       return Dog.superConstruct.apply(this, arguments);
     }
     extend(Dog, Animal, { ensureProperties: ['arg1', 'arg2'] });
 
     Dog.prototype.name = function name() {
+      // @ts-ignore
       return `Dog ${Dog.super_.name.call(this)}`;
     };
 
@@ -30,9 +33,11 @@ describe('ensure properties', () => {
       return `${this.name()} run`;
     };
 
+    // @ts-ignore
     const animal = new Animal();
     assert.equal(animal.move(), 'No name unknown');
 
+    // @ts-ignore
     const dog = new Dog('Rover', 'something');
     assert.equal(dog.move(), 'Dog Rover run');
     assert.equal(dog.arg1, 'Rover');

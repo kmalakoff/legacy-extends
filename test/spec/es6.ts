@@ -1,6 +1,7 @@
-const assert = require('assert');
+import assert from 'assert';
 
-const extend = require('legacy-extends');
+// @ts-ignore
+import extend from 'legacy-extends';
 
 describe('es6 class', () => {
   describe('es5', () => {
@@ -20,9 +21,11 @@ describe('es6 class', () => {
       function Dog(name) {
         Animal.call(this, name);
       }
+      // @ts-ignore
       extend(Dog, Animal);
 
       Dog.prototype.name = function name() {
+        // @ts-ignore
         return `Dog ${Dog.super_.name.call(this)}`;
       };
 
@@ -33,9 +36,11 @@ describe('es6 class', () => {
       function Cat(name) {
         Animal.call(this, name);
       }
+      // @ts-ignore
       extend(Cat, Animal);
 
       Cat.prototype.name = function name() {
+        // @ts-ignore
         return `Cat ${Cat.super_.name.call(this)}`;
       };
 
@@ -43,6 +48,7 @@ describe('es6 class', () => {
         return `${this.name()} sneak`;
       };
 
+      // @ts-ignore
       const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
@@ -67,11 +73,13 @@ describe('es6 class', () => {
       };
 
       function Dog(name) {
+        // @ts-ignore
         return Dog.superConstruct.call(this, name);
       }
       extend(Dog, Animal);
 
       Dog.prototype.name = function name() {
+        // @ts-ignore
         return `Dog ${Dog.super_.name.call(this)}`;
       };
 
@@ -80,11 +88,14 @@ describe('es6 class', () => {
       };
 
       function Cat(name) {
+        // @ts-ignore
         return Cat.superConstruct.call(this, name);
       }
+      // @ts-ignore
       extend(Cat, Animal);
 
       Cat.prototype.name = function name() {
+        // @ts-ignore
         return `Cat ${Cat.super_.name.call(this)}`;
       };
 
@@ -92,12 +103,15 @@ describe('es6 class', () => {
         return `${this.name()} sneak`;
       };
 
+      // @ts-ignore
       const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
+      // @ts-ignore
       const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
+      // @ts-ignore
       const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
@@ -114,11 +128,13 @@ describe('es6 class', () => {
       };
 
       function Dog(name) {
+        // @ts-ignore
         return Dog.superConstruct.call(this, name);
       }
       extend(Dog, Animal, { ensureProperties: ['_name'] });
 
       Dog.prototype.name = function name() {
+        // @ts-ignore
         return `Dog ${Dog.super_.name.call(this)}`;
       };
 
@@ -127,11 +143,13 @@ describe('es6 class', () => {
       };
 
       function Cat(name) {
+        // @ts-ignore
         return Cat.superConstruct.call(this, name);
       }
       extend(Cat, Animal, { ensureProperties: ['_name'] });
 
       Cat.prototype.name = function name() {
+        // @ts-ignore
         return `Cat ${Cat.super_.name.call(this)}`;
       };
 
@@ -142,9 +160,11 @@ describe('es6 class', () => {
       const animal = new Animal();
       assert.equal(animal.move(), 'undefined unknown');
 
+      // @ts-ignore
       const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
+      // @ts-ignore
       const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
@@ -154,10 +174,12 @@ describe('es6 class', () => {
     it('inherits', () => {
       class Animal {
         constructor(name) {
+          // @ts-ignore
           this._name = name || 'No name';
         }
 
         name() {
+          // @ts-ignore
           return this._name;
         }
 
@@ -173,6 +195,7 @@ describe('es6 class', () => {
         }
 
         name() {
+          // @ts-ignore
           return `Dog ${Dog.super_.name.call(this)}`;
         }
 
@@ -189,6 +212,7 @@ describe('es6 class', () => {
         }
 
         name() {
+          // @ts-ignore
           return `Cat ${Cat.super_.name.call(this)}`;
         }
 
@@ -198,6 +222,7 @@ describe('es6 class', () => {
       }
       extend(Cat, Animal);
 
+      // @ts-ignore
       const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
@@ -211,10 +236,12 @@ describe('es6 class', () => {
     it('superConstruct', () => {
       class Animal {
         constructor(name) {
+          // @ts-ignore
           this._name = name || 'No name';
         }
 
         name() {
+          // @ts-ignore
           return this._name;
         }
 
@@ -225,11 +252,13 @@ describe('es6 class', () => {
 
       class Dog {
         constructor(name) {
+          // @ts-ignore
           // biome-ignore lint/correctness/noConstructorReturn: <explanation>
           return Dog.superConstruct.call(this, name);
         }
 
         name() {
+          // @ts-ignore
           return `Dog ${Dog.super_.name.call(this)}`;
         }
 
@@ -241,11 +270,13 @@ describe('es6 class', () => {
 
       class Cat {
         constructor(name) {
+          // @ts-ignore
           // biome-ignore lint/correctness/noConstructorReturn: <explanation>
           return Cat.superConstruct.call(this, name);
         }
 
         name() {
+          // @ts-ignore
           return `Cat ${Cat.super_.name.call(this)}`;
         }
 
@@ -255,6 +286,7 @@ describe('es6 class', () => {
       }
       extend(Cat, Animal);
 
+      // @ts-ignore
       const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
@@ -268,6 +300,7 @@ describe('es6 class', () => {
     it('ensureProperties', () => {
       class Animal {
         name() {
+          // @ts-ignore
           return this._name;
         }
 
@@ -278,11 +311,13 @@ describe('es6 class', () => {
 
       class Dog {
         constructor(name) {
+          // @ts-ignore
           // biome-ignore lint/correctness/noConstructorReturn: <explanation>
           return Dog.superConstruct.call(this, name);
         }
 
         name() {
+          // @ts-ignore
           return `Dog ${Dog.super_.name.call(this)}`;
         }
 
@@ -294,11 +329,13 @@ describe('es6 class', () => {
 
       class Cat {
         constructor(name) {
+          // @ts-ignore
           // biome-ignore lint/correctness/noConstructorReturn: <explanation>
           return Cat.superConstruct.call(this, name);
         }
 
         name() {
+          // @ts-ignore
           return `Cat ${Cat.super_.name.call(this)}`;
         }
 

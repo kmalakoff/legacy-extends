@@ -1,6 +1,7 @@
-const assert = require('assert');
+import assert from 'assert';
 
-const extend = require('legacy-extends');
+// @ts-ignore
+import extend from 'legacy-extends';
 
 describe('es5 class', () => {
   describe('es5', () => {
@@ -23,6 +24,7 @@ describe('es5 class', () => {
       extend(Dog, Animal);
 
       Dog.prototype.name = function name() {
+        // @ts-ignore
         return `Dog ${Dog.super_.name.call(this)}`;
       };
 
@@ -36,6 +38,7 @@ describe('es5 class', () => {
       extend(Cat, Animal);
 
       Cat.prototype.name = function name() {
+        // @ts-ignore
         return `Cat ${Cat.super_.name.call(this)}`;
       };
 
@@ -43,6 +46,7 @@ describe('es5 class', () => {
         return `${this.name()} sneak`;
       };
 
+      // @ts-ignore
       const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
@@ -67,11 +71,13 @@ describe('es5 class', () => {
       };
 
       function Dog(name) {
+        // @ts-ignore
         return Dog.superConstruct.call(this, name);
       }
       extend(Dog, Animal);
 
       Dog.prototype.name = function name() {
+        // @ts-ignore
         return `Dog ${Dog.super_.name.call(this)}`;
       };
 
@@ -80,11 +86,13 @@ describe('es5 class', () => {
       };
 
       function Cat(name) {
+        // @ts-ignore
         return Cat.superConstruct.call(this, name);
       }
       extend(Cat, Animal);
 
       Cat.prototype.name = function name() {
+        // @ts-ignore
         return `Cat ${Cat.super_.name.call(this)}`;
       };
 
@@ -92,12 +100,15 @@ describe('es5 class', () => {
         return `${this.name()} sneak`;
       };
 
+      // @ts-ignore
       const animal = new Animal();
       assert.equal(animal.move(), 'No name unknown');
 
+      // @ts-ignore
       const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
+      // @ts-ignore
       const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
@@ -114,11 +125,13 @@ describe('es5 class', () => {
       };
 
       function Dog(name) {
+        // @ts-ignore
         return Dog.superConstruct.call(this, name);
       }
       extend(Dog, Animal, { ensureProperties: ['_name'] });
 
       Dog.prototype.name = function name() {
+        // @ts-ignore
         return `Dog ${Dog.super_.name.call(this)}`;
       };
 
@@ -127,11 +140,13 @@ describe('es5 class', () => {
       };
 
       function Cat(name) {
+        // @ts-ignore
         return Cat.superConstruct.call(this, name);
       }
       extend(Cat, Animal, { ensureProperties: ['_name'] });
 
       Cat.prototype.name = function name() {
+        // @ts-ignore
         return `Cat ${Cat.super_.name.call(this)}`;
       };
 
@@ -142,9 +157,11 @@ describe('es5 class', () => {
       const animal = new Animal();
       assert.equal(animal.move(), 'undefined unknown');
 
+      // @ts-ignore
       const dog = new Dog('Rover');
       assert.equal(dog.move(), 'Dog Rover run');
 
+      // @ts-ignore
       const cat = new Cat('Whiskers');
       assert.equal(cat.move(), 'Cat Whiskers sneak');
     });
