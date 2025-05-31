@@ -12,9 +12,12 @@ export interface KlassHelper {
   super_: typeof Function.prototype;
   superConstruct: () => Klass;
 }
+export interface Options {
+  ensureProperties?: unknown[];
+}
 
 const hasProp = {}.hasOwnProperty;
-function extendLegacy(child: Klass, parent: Klass, options) {
+function extendLegacy(child: Klass, parent: Klass, options?: Options) {
   const initialize = options && options.ensureProperties && options.ensureProperties.length ? ensureProperties.bind(null, options.ensureProperties) : null;
 
   for (const key in parent) {
@@ -37,14 +40,15 @@ function extendLegacy(child: Klass, parent: Klass, options) {
   };
 }
 
-function extendReflect(child, parent, options) {
+function extendReflect(child: Klass, parent: Klass, options?: Options) {
   const initialize = options && options.ensureProperties && options.ensureProperties.length ? ensureProperties.bind(null, options.ensureProperties) : null;
 
   Reflect.setPrototypeOf(child.prototype, parent.prototype);
   Reflect.setPrototypeOf(child, parent);
 
-  child.super_ = parent.prototype;
-  child.superConstruct = function construct() {
+  const khild = child as unknown as KlassHelper;
+  khild.super_ = parent.prototype;
+  khild.superConstruct = function construct() {
     // biome-ignore lint/style/noArguments: <explanation>
     const self = Reflect.construct(parent, arguments, child);
 
