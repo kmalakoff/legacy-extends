@@ -1,4 +1,4 @@
-function ensureProperties(names, self, args) {
+function ensureProperties(names: string[], self: object, args: unknown[]) {
   if (self[names[0]] !== args[0]) {
     const length = names.length;
     for (let index = 0; index < length; index++) {
@@ -7,8 +7,14 @@ function ensureProperties(names, self, args) {
   }
 }
 
+export type Klass = new (...args: unknown[]) => unknown;
+export interface KlassHelper {
+  super_: typeof Function.prototype;
+  superConstruct: () => Klass;
+}
+
 const hasProp = {}.hasOwnProperty;
-function extendLegacy(child, parent, options) {
+function extendLegacy(child: Klass, parent: Klass, options) {
   const initialize = options && options.ensureProperties && options.ensureProperties.length ? ensureProperties.bind(null, options.ensureProperties) : null;
 
   for (const key in parent) {
@@ -19,8 +25,9 @@ function extendLegacy(child, parent, options) {
   child.prototype = new ctor();
   child.prototype.constructor = child;
 
-  child.super_ = parent.prototype;
-  child.superConstruct = function construct() {
+  const khild = child as unknown as KlassHelper;
+  khild.super_ = parent.prototype;
+  khild.superConstruct = function construct() {
     // biome-ignore lint/style/noArguments: <explanation>
     parent.prototype.constructor.apply(this, arguments);
 
