@@ -31,10 +31,10 @@ function extendLegacy(child: Klass, parent: Klass, options?: Options) {
   const khild = child as unknown as KlassHelper;
   khild.super_ = parent.prototype;
   khild.superConstruct = function construct() {
-    // biome-ignore lint/style/noArguments: <explanation>
+    // biome-ignore lint/complexity/noArguments: Apply arguments
     parent.prototype.constructor.apply(this, arguments);
 
-    // biome-ignore lint/style/noArguments: <explanation>
+    // biome-ignore lint/complexity/noArguments: Apply arguments
     !initialize || initialize(this, arguments);
     return this;
   };
@@ -49,10 +49,10 @@ function extendReflect(child: Klass, parent: Klass, options?: Options) {
   const khild = child as unknown as KlassHelper;
   khild.super_ = parent.prototype;
   khild.superConstruct = function construct() {
-    // biome-ignore lint/style/noArguments: <explanation>
+    // biome-ignore lint/complexity/noArguments: Apply arguments
     const self = Reflect.construct(parent, arguments, child);
 
-    // biome-ignore lint/style/noArguments: <explanation>
+    // biome-ignore lint/complexity/noArguments: Apply arguments
     !initialize || initialize(self, arguments);
     return self;
   };

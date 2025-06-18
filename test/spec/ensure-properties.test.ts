@@ -19,7 +19,7 @@ describe('ensure properties', () => {
 
     function Dog(_name) {
       // @ts-ignore
-      // biome-ignore lint/style/noArguments: <explanation>
+      // biome-ignore lint/complexity/noArguments: Apply arguments
       return Dog.superConstruct.apply(this, arguments);
     }
     extend(Dog, Animal, { ensureProperties: ['arg1', 'arg2'] });

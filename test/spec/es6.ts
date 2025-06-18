@@ -190,7 +190,7 @@ describe('es6 class', () => {
 
       class Dog {
         constructor(name) {
-          // biome-ignore lint/correctness/noConstructorReturn: <explanation>
+          // biome-ignore lint/correctness/noConstructorReturn: Legacy
           return Reflect.construct(Animal, [name], Dog);
         }
 
@@ -207,7 +207,7 @@ describe('es6 class', () => {
 
       class Cat {
         constructor(name) {
-          // biome-ignore lint/correctness/noConstructorReturn: <explanation>
+          // biome-ignore lint/correctness/noConstructorReturn: Legacy
           return Reflect.construct(Animal, [name], Cat);
         }
 
@@ -253,7 +253,7 @@ describe('es6 class', () => {
       class Dog {
         constructor(name) {
           // @ts-ignore
-          // biome-ignore lint/correctness/noConstructorReturn: <explanation>
+          // biome-ignore lint/correctness/noConstructorReturn: Legacy
           return Dog.superConstruct.call(this, name);
         }
 
@@ -271,7 +271,7 @@ describe('es6 class', () => {
       class Cat {
         constructor(name) {
           // @ts-ignore
-          // biome-ignore lint/correctness/noConstructorReturn: <explanation>
+          // biome-ignore lint/correctness/noConstructorReturn: Legacy
           return Cat.superConstruct.call(this, name);
         }
 
@@ -312,7 +312,7 @@ describe('es6 class', () => {
       class Dog {
         constructor(name) {
           // @ts-ignore
-          // biome-ignore lint/correctness/noConstructorReturn: <explanation>
+          // biome-ignore lint/correctness/noConstructorReturn: Legacy
           return Dog.superConstruct.call(this, name);
         }
 
@@ -330,7 +330,7 @@ describe('es6 class', () => {
       class Cat {
         constructor(name) {
           // @ts-ignore
-          // biome-ignore lint/correctness/noConstructorReturn: <explanation>
+          // biome-ignore lint/correctness/noConstructorReturn: Legacy
           return Cat.superConstruct.call(this, name);
         }
 
