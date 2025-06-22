@@ -1,6 +1,6 @@
 {
   "name": "legacy-extends",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Helper to extend a class including defining super_ and superConstruct (optional) on the derived class. Compatible with Node.js inherits and handles es6 classes using Reflect API",
   "keywords": [
     "extends",
