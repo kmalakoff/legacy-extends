@@ -17,7 +17,9 @@ export interface Options {
 }
 
 const hasProp = {}.hasOwnProperty;
-function extendLegacy(child: Klass, parent: Klass, options?: Options) {
+function extendLegacy(child_: unknown, parent_: unknown, options?: Options) {
+  const child = child_ as Klass;
+  const parent = parent_ as Klass;
   const initialize = options && options.ensureProperties && options.ensureProperties.length ? ensureProperties.bind(null, options.ensureProperties) : null;
 
   for (const key in parent) {
@@ -40,7 +42,9 @@ function extendLegacy(child: Klass, parent: Klass, options?: Options) {
   };
 }
 
-function extendReflect(child: Klass, parent: Klass, options?: Options) {
+function extendReflect(child_: unknown, parent_: unknown, options?: Options) {
+  const child = child_ as Klass;
+  const parent = parent_ as Klass;
   const initialize = options && options.ensureProperties && options.ensureProperties.length ? ensureProperties.bind(null, options.ensureProperties) : null;
 
   Reflect.setPrototypeOf(child.prototype, parent.prototype);
